@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crime Registration - Online Crime Reporting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f7fc;
+        transition: all 0.5s ease;
+      }
+      header {
+        background: linear-gradient(45deg, #3e8e41, #4caf50);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      header h1 {
+        font-size: 2.5rem;
+      }
+      section {
+        max-width: 900px;
+        margin: 3rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      form input,
+      form select,
+      form textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      form button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 0.9rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+      form button:hover {
+        background: #45a049;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><i class="fas fa-shield-alt"></i> Crime Registration</h1>
+    </header>
+
+    <section>
+      <h2>Register to Report a Crime</h2>
+      <form
+        id="crimeForm"
+        action="{% url 'register_complaint' %}"
+        method="POST"
+      >
+        {% csrf_token %}
+
+        <label>Name:</label>
+        <input type="text" name="name" required />
+
+        <label>Address:</label>
+        <textarea name="address"></textarea>
+
+        <label>Crime Location:</label>
+        <textarea name="crime_location"></textarea>
+
+        <label>Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Phone:</label>
+        <input type="text" name="phone" required />
+
+        <label>Crime Type:</label>
+        <select name="crime_type" id="crime_type" onchange="toggleOtherInput()">
+          <option value="Theft">Theft</option>
+          <option value="Assault">Assault</option>
+          <option value="Fraud">Fraud</option>
+          <option value="Hacking">Hacking</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <!-- Hidden input for custom crime type -->
+        <input
+          type="text"
+          id="other_crime_type"
+          name="other_crime_type"
+          placeholder="Specify Other"
+          style="display: none"
+        />
+
+        <label>Crime Description:</label>
+        <textarea name="crime_description"></textarea>
+
+        <label>Provide Evidence URL:</label>
+        <input type="text" name="eviurl" />
+
+        <button type="submit">Submit Complaint</button>
+      </form>
+    </section>
+
+    <script>
+      function toggleOtherInput() {
+        const crimeType = document.getElementById("crime_type").value;
+        const otherInput = document.getElementById("other_crime_type");
+        otherInput.style.display = crimeType === "Other" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>

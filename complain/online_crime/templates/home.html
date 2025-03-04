@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Crime Reporting Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+
+      header {
+        background: #2d2d2d;
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 600;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        background: #4caf50;
+        margin-top: 1rem;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 10px;
+      }
+
+      nav ul li a:hover {
+        background: #45a049;
+        border-radius: 4px;
+      }
+
+      .hero {
+        position: relative;
+        background-image: url("data:image/jpeg;base64,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");
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+      }
+
+      .hero h2 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .intro-section {
+        text-align: center;
+        padding: 3rem 1rem;
+        background-color: #fff;
+      }
+
+      .intro-section h2 {
+        font-size: 2.5rem;
+        color: #333;
+      }
+
+      .intro-section p {
+        font-size: 1.2rem;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .quick-links {
+        display: flex;
+        justify-content: space-around;
+        padding: 2rem 0;
+        background-color: #f9f9f9;
+      }
+
+      .quick-links div {
+        text-align: center;
+        padding: 1.5rem;
+        background: #4caf50;
+        color: white;
+        border-radius: 8px;
+        width: 20%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s;
+      }
+
+      .quick-links div:hover {
+        background: #45a049;
+        cursor: pointer;
+      }
+
+      .quick-links div i {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+
+      .quick-links div h3 {
+        font-size: 1.5rem;
+      }
+
+      footer {
+        background: #263238;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media screen and (max-width: 768px) {
+        .quick-links {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .quick-links div {
+          width: 80%;
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1><i class="fas fa-shield-alt"></i> Online Crime Reporting Portal</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li><a href="help">Help</a></li>
+          <li><a href="register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section with Background Image -->
+    <section class="hero">
+      <h2>Make Your Voice Heard. Report a Crime Today.</h2>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+      <h2>Welcome to the Online Crime Reporting Portal</h2>
+      <p>
+        Our platform enables citizens to easily report crimes, track their
+        cases, and stay updated on the status of their complaints. Whether you
+        are a victim, witness, or concerned citizen, we provide a streamlined,
+        secure, and anonymous process for reporting crimes.
+      </p>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+      <div>
+        <i class="fas fa-user-plus"></i>
+        <a href="register.html"><h3>Register</h3></a>
+        <p>Create your account to report crimes and track your complaints.</p>
+      </div>
+      <!--<div>
+            <i class="fas fa-file-alt"></i>
+           <a href="report.html"> <h3>Reported cases</h3> </a>
+            <p>filed cases</p>
+        </div>-->
+      <div>
+        <i class="fas fa-search"></i>
+        <a href="track_complaint"><h3>Track complaints</h3></a>
+        <p>Keep tabs on the progress of your case with our tracking tool.</p>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>&copy; 2024 Online Crime Reporting Portal. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

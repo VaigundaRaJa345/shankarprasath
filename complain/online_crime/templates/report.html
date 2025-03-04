@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reported Cases - Online Crime Reporting Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar input {
+            padding: 0.8rem;
+            width: 70%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .search-bar button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background: #4CAF50;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 1.2rem 0;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1><i class="fas fa-flag"></i> Reported Cases</h1>
+    </header>
+
+    <!-- Report Section -->
+    <section>
+        <h2><i class="fas fa-list"></i> View Your Reported Cases</h2>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search by Complaint ID or Type of Crime...">
+            <button onclick="searchCases()">Search</button>
+        </div>
+
+        <!-- Table to Display Reported Cases -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Type of Crime</th>
+                    <th>Status</th>
+                    <th>Date Reported</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="reportTableBody">
+                <!-- Sample Data -->
+                <tr>
+                    <td>1001</td>
+                    <td>Theft</td>
+                    <td>Under Investigation</td>
+                    <td>2024-12-05</td>
+                    <td><button>View</button></td>
+                </tr>
+                <tr>
+                    <td>1002</td>
+                    <td>Assault</td>
+                    <td>Resolved</td>
+                    <td>2024-11-20</td>
+                    <td><button>View</button></td>
+                </tr>
+                <tr>
+                    <td>1003</td>
+                    <td>Fraud</td>
+                    <td>Pending</td>
+                    <td>2024-12-01</td>
+                    <td><button>View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Online Crime Reporting Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function searchCases() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const tableRows = document.getElementById("reportTableBody").getElementsByTagName("tr");
+
+            for (let row of tableRows) {
+                let complaintId = row.cells[0].textContent.toLowerCase();
+                let crimeType = row.cells[1].textContent.toLowerCase();
+
+                if (complaintId.includes(searchTerm) || crimeType.includes(searchTerm)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>

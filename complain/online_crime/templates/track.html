@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Complaint - Online Crime Reporting Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7fc;
+        transition: all 0.5s ease;
+      }
+
+      header {
+        background: linear-gradient(45deg, #3e8e41, #4caf50);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      header h1 {
+        font-size: 3rem;
+        font-weight: 600;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        background: #4caf50;
+        margin-top: 1rem;
+        border-radius: 5px;
+      }
+
+      nav ul li {
+        margin: 0 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 12px 20px;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        background: #45a049;
+        transform: scale(1.1);
+        border-radius: 4px;
+      }
+
+      section {
+        max-width: 900px;
+        margin: 4rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-out;
+      }
+
+      section h2 {
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #555;
+      }
+
+      form input,
+      form button {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+        font-size: 1rem;
+      }
+
+      form input:focus {
+        border-color: #4caf50;
+        outline: none;
+        transform: scale(1.02);
+      }
+
+      form button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 0.9rem;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      form button:hover {
+        background: #45a049;
+        transform: translateY(-3px);
+      }
+
+      footer {
+        background: #263238;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 4rem;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* Animation for Fade-in */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Background gradient animation */
+      @keyframes gradient {
+        0% {
+          background: linear-gradient(45deg, #4caf50, #3e8e41);
+        }
+        50% {
+          background: linear-gradient(45deg, #76c7c0, #6b8d7a);
+        }
+        100% {
+          background: linear-gradient(45deg, #4caf50, #3e8e41);
+        }
+      }
+
+      /* Apply the animated gradient background */
+      body {
+        animation: gradient 15s ease infinite;
+      }
+
+      .input-group {
+        margin-bottom: 1.5rem;
+      }
+    </style>
+    <section>
+      <h2>Track Your Complaint Status</h2>
+      <form action="{% url 'track_complaint' %}" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="complaint_id">Enter Complaint ID:</label>
+          <input
+            type="text"
+            id="complaint_id"
+            name="complaint_id"
+            placeholder="Enter your complaint ID"
+            required
+          />
+        </div>
+    
+        <div class="input-group">
+          <button type="submit">Track Complaint</button>
+        </div>
+      </form>
+    
+      {% if complaint %}
+      <!-- Display Complaint Details -->
+      <div id="complaint-details">
+        <h3>Complaint Details</h3>
+        <p><strong>Complaint ID:</strong> {{ complaint.complaint_id }}</p>
+        <p><strong>Name:</strong> {{ complaint.name }}</p>
+        <p><strong>Address:</strong> {{ complaint.address }}</p>
+        <p><strong>Crime Location:</strong> {{ complaint.crime_location }}</p>
+        <p><strong>Email:</strong> {{ complaint.email }}</p>
+        <p><strong>Phone:</strong> {{ complaint.phone }}</p>
+        <p><strong>Crime Type:</strong> {{ complaint.crime_type }}</p>
+        <p><strong>Crime Description:</strong> {{ complaint.description }}</p>
+        <p><strong>Evidence URL:</strong> <a href="{{ complaint.evidence_url }}" target="_blank">Click Here</a></p>
+        <p><strong>Status:</strong> <span style="color: {% if complaint.status == 'Resolved' %}green{% else %}red{% endif %}; font-weight: bold;">{{ complaint.status }}</span></p>
+      </div>
+      {% endif %}
+    </section>
+    
+</html>
